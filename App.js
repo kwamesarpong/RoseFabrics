@@ -29,7 +29,14 @@ import SplashScreen from 'react-native-splash-screen';
 type Props = {};
 export default class App extends Component<Props> {
   
-  componentDidMount() {
+  async componentDidMount() {
+    if(await AsyncStorage.getItem('token')){
+        this.setState({ loading: false })
+    }
+    else {
+        this.setState({ loading: false })
+        Actions.login()
+    }
       SplashScreen.hide();
   }
 
@@ -38,12 +45,12 @@ export default class App extends Component<Props> {
           <Router>
               <Scene key='root' navBar={Header} >
                   <Drawer key="drawer" contentComponent={Sidebar} hideDrawerButton drawerWidth={300} >
-                      <Scene key='home' component={requireAuth(Home)} title='home'hideNavBar />
-                      <Scene key='carts' component={requireAuth(Cart)} title='cart' hideNavBar />
+                      <Scene key='home' component={Home} title='home' hideNavBar />
+                      <Scene key='carts' component={Cart} title='cart' hideNavBar />
                   </Drawer>
                   <Scene key='login' component={Login} title='Login' hideNavBar/>
                   <Scene key='signup' component={Signup} title='Signup'  hideNavBar/>
-                  <Scene key={'product'} path={"/product/:id/"} component={requireAuth(ProductDetails)} navBar={BackHeader} />
+                  <Scene key={'product'} path={"/product/:id/"} component={ProductDetails} navBar={BackHeader} />
                   <Scene key='checkout' component={Checkout} navBar={BackHeader} />
                   <Scene key='mysterybox' component={MysteryBox} title='mysterybox' navBar={BackHeader} />
                   <Scene key='dealshome' component={DealsHome} title='dealshome' navBar={BackHeader} />

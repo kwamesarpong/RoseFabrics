@@ -20,10 +20,10 @@ class Home extends PureComponent {
     active: false
   }
 
-  async componentDidMount() {
+  /* async componentDidMount() {
 
     const url = 'http://50.116.8.175/api/v1/service/rosefabrics/db?table=slider'
-    const res = await axios.get(url, {headers: {'Devless-token': 'd463354149e3e51dd115ec140819e0a7'}})
+    const res = await axios.get(url, {headers: {'Devless-token': 'd463354149e3e51dd115ec140819e0a7'}}).catch(err => console.error('An error occurred', err))
     let sliderImage = res.data.payload.results;
     let sliderArray = sliderImage.reverse();
 
@@ -32,78 +32,69 @@ class Home extends PureComponent {
       loading: false
     })
     
-  }
+  } */
 
   async componentWillMount() {
+      const url = 'http://50.116.8.175/api/v1/service/rosefabrics/db?table=slider'
+      const res = await axios.get(url, {headers: {'Devless-token': 'd463354149e3e51dd115ec140819e0a7'}}).catch(err => console.error('An error occurred', err))
+      let sliderImage = res.data.payload.results;
+      let sliderArray = sliderImage.reverse();
 
-          if(await AsyncStorage.getItem('token')){
-              this.setState({ loading: false })
-          }
-          else {
-              this.setState({ loading: false })
-              Actions.login()
-          }
+      this.setState({
+        img: sliderArray[0].img_one,
+        loading: false
+      })
 
-          OneSignal.init("fd5bfbad-8190-4ae9-9f46-7c6f1bec6057");
-    
-          OneSignal.addEventListener('received', this.onReceived);
-          OneSignal.addEventListener('opened', this.onOpened);
-          OneSignal.addEventListener('ids', this.onIds);
-      }
+      OneSignal.init("fd5bfbad-8190-4ae9-9f46-7c6f1bec6057");
 
-      componentWillUnmount() {
-          OneSignal.removeEventListener('received', this.onReceived);
-          OneSignal.removeEventListener('opened', this.onOpened);
-          OneSignal.removeEventListener('ids', this.onIds);
-      }
+      OneSignal.addEventListener('received', this.onReceived);
+      OneSignal.addEventListener('opened', this.onOpened);
+      OneSignal.addEventListener('ids', this.onIds);
+  }
 
-      onReceived(notification) {
-          console.log("Notification received: ", notification);
-      }
-    
-      onOpened(openResult) {
-        console.log('Message: ', openResult.notification.payload.body);
-        console.log('Data: ', openResult.notification.payload.additionalData);
-        console.log('isActive: ', openResult.notification.isAppInFocus);
-        console.log('openResult: ', openResult);
-      }
-    
-      onIds(device) {
-        console.log('Device info: ', device);
-      }
+  componentWillUnmount() {
+      OneSignal.removeEventListener('received', this.onReceived);
+      OneSignal.removeEventListener('opened', this.onOpened);
+      OneSignal.removeEventListener('ids', this.onIds);
+  }
+
+  onReceived(notification) {
+      console.log("Notification received: ", notification);
+  }
+
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  }
+
+  onIds(device) {
+    console.log('Device info: ', device);
+  }
 
 
-handleSelect = (data) => {
-  Actions.product({data})
-}
+  handleSelect = (data) => {
+    Actions.product({data})
+  }
 
-makeCall = () => {
-  Linking.openURL('tel:+233272954084');
-}
+  makeCall = () => {
+    Linking.openURL('tel:+233272954084');
+  }
 
-liveMessaging = () => {
-  Linking.openURL('https://tawk.to/chat/58c9418441acfb239f8daf04/default/?$_tawk_popout=true').catch(err => console.error('An error occurred', err))
-}
+  liveMessaging = () => {
+    Linking.openURL('https://tawk.to/chat/58c9418441acfb239f8daf04/default/?$_tawk_popout=true').catch(err => console.error('An error occurred', err))
+  }
 
  render(){
-   console.log(this.props.navigation.state.params.name)
+   console.log(this.state.img)
     if(this.state.loading){
       return (<View style={{alignItems: 'center', paddingTop: '50%', backgroundColor: '#ffffff', height: '100%'}}>
                 <ActivityIndicator size="large" color='brown' />
               </View>)
     }
-    /* if(this.state.loading){
-      return (
-          <View style={{flex: 1}}>
-            <View style={{flex: 1}}>
-                <Image source={require('../splash.png')} style={{width:'100%', height:'100%'}} />
-            </View>
-          </View>
-      )
-    } */
     return (
       <View style={{flex:1, backgroundColor:'white'}}>
-      {/* { Alert.alert(`Welocome ${this.props.params.name}`)} */}
       <ScrollView>
         <SearchBar />
         <Card
@@ -112,6 +103,7 @@ liveMessaging = () => {
         imageStyle={styles.image}
         imageWrapperStyle={styles.imageWrapper}
         image={{uri: this.state.img}}>
+        {/* image={require('../splash.png')}> */}
         </Card>
         <Selection />
         <Products handleSelect={this.handleSelect}/>
