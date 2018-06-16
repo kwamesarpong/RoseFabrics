@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import OneSignal from 'react-native-onesignal';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -23,6 +24,35 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
 
+  componentWillMount() {
+      OneSignal.init("fd5bfbad-8190-4ae9-9f46-7c6f1bec6057");
+    
+      OneSignal.addEventListener('received', this.onReceived);
+      OneSignal.addEventListener('opened', this.onOpened);
+      OneSignal.addEventListener('ids', this.onIds);
+  }
+
+  componentWillUnmount() {
+      OneSignal.removeEventListener('received', this.onReceived);
+      OneSignal.removeEventListener('opened', this.onOpened);
+      OneSignal.removeEventListener('ids', this.onIds);
+  }
+
+  onReceived(notification) {
+      console.log("Notification received: ", notification);
+  }
+
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  }
+
+  onIds(device) {
+  console.log('Device info: ', device);
+  }
+  
   componentDidMount() {
   	// do stuff while splash screen is shown
       // After having done stuff (such as async tasks) hide the splash screen
