@@ -5,92 +5,54 @@
  */
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Router, Scene, Drawer, Actions } from 'react-native-router-flux';
+import { AsyncStorage, View, Image } from 'react-native'
+import Header from './src/Header'
+import BackHeader from './src/BackHeader'
+import Login from './src/Login'
+import Signup from './src/Signup'
+import Sidebar from './src/Sidebar'
+import Home from './src/Home'
+import Cart from './src/Carts'
+import ProductDetails from './src/ProductDetails'
+import Checkout from './src/Checkout'
+import requireAuth from './src/HOC'
+import MysteryBox from './src/Mysterybox'
+import DealsHome from './src/DealsHome'
+import NotificationsHome from './src/NotificationsHome'
+import CategoriesHome from './src/CategoriesHome'
+import TailorsHome from './src/TailorsHome'
+import TransactionsHome from './src/TransactionsHome'
 import SplashScreen from 'react-native-splash-screen';
-import OneSignal from 'react-native-onesignal';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 type Props = {};
 export default class App extends Component<Props> {
-
-  componentWillMount() {
-      OneSignal.init("fd5bfbad-8190-4ae9-9f46-7c6f1bec6057");
-    
-      OneSignal.addEventListener('received', this.onReceived);
-      OneSignal.addEventListener('opened', this.onOpened);
-      OneSignal.addEventListener('ids', this.onIds);
-  }
-
-  componentWillUnmount() {
-      OneSignal.removeEventListener('received', this.onReceived);
-      OneSignal.removeEventListener('opened', this.onOpened);
-      OneSignal.removeEventListener('ids', this.onIds);
-  }
-
-  onReceived(notification) {
-      console.log("Notification received: ", notification);
-  }
-
-  onOpened(openResult) {
-    console.log('Message: ', openResult.notification.payload.body);
-    console.log('Data: ', openResult.notification.payload.additionalData);
-    console.log('isActive: ', openResult.notification.isAppInFocus);
-    console.log('openResult: ', openResult);
-  }
-
-  onIds(device) {
-  console.log('Device info: ', device);
-  }
   
   componentDidMount() {
-  	// do stuff while splash screen is shown
-      // After having done stuff (such as async tasks) hide the splash screen
       SplashScreen.hide();
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Hi my name is Kwame Sarp
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+          <Router>
+              <Scene key='root' navBar={Header} >
+                  <Drawer key="drawer" contentComponent={Sidebar} hideDrawerButton drawerWidth={300} >
+                      <Scene key='home' component={requireAuth(Home)} title='home'hideNavBar />
+                      <Scene key='carts' component={requireAuth(Cart)} title='cart' hideNavBar />
+                  </Drawer>
+                  <Scene key='login' component={Login} title='Login' hideNavBar/>
+                  <Scene key='signup' component={Signup} title='Signup'  hideNavBar/>
+                  <Scene key={'product'} path={"/product/:id/"} component={requireAuth(ProductDetails)} navBar={BackHeader} />
+                  <Scene key='checkout' component={Checkout} navBar={BackHeader} />
+                  <Scene key='mysterybox' component={MysteryBox} title='mysterybox' navBar={BackHeader} />
+                  <Scene key='dealshome' component={DealsHome} title='dealshome' navBar={BackHeader} />
+                  <Scene key='notificationshome' component={NotificationsHome} title='notificationshome' navBar={BackHeader} />
+                  <Scene key='categorieshome' component={CategoriesHome} title='categorieshome' navBar={BackHeader} />
+                  <Scene key='tailorshome' component={TailorsHome} title='tailorshome' navBar={BackHeader} />
+                  <Scene key='transactionshome' component={TransactionsHome} title='transactionshome' navBar={BackHeader} />
+              </Scene>
+          </Router>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
