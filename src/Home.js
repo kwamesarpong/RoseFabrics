@@ -83,11 +83,10 @@ class Home extends PureComponent {
   }
 
   liveMessaging = () => {
-    Linking.openURL('https://tawk.to/chat/58c9418441acfb239f8daf04/default/?$_tawk_popout=true').catch(err => console.error('An error occurred', err))
+    Linking.openURL('https://api.whatsapp.com/send?phone=233272954084').catch(err => console.error('An error occurred', err))
   }
 
  render(){
-   console.log(this.state.img)
     if(this.state.loading){
       return (<View style={{alignItems: 'center', paddingTop: '50%', backgroundColor: '#ffffff', height: '100%'}}>
                 <ActivityIndicator size="large" color='brown' />
