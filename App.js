@@ -23,32 +23,42 @@ import NotificationsHome from './src/NotificationsHome'
 import CategoriesHome from './src/CategoriesHome'
 import TailorsHome from './src/TailorsHome'
 import TransactionsHome from './src/TransactionsHome'
+import SplashScreen from 'react-native-splash-screen';
 
 
 export default class App extends Component<Props> {
-
+  
+  async componentDidMount() {
+    if(await AsyncStorage.getItem('token')){
+        this.setState({ loading: false })
+    }
+    else {
+        this.setState({ loading: false })
+        Actions.login()
+    }
+      SplashScreen.hide();
+  }
 
   render() {
-      
     return (
-              <Router>
-                  <Scene key='root' navBar={Header} >
-                      <Drawer key="drawer" contentComponent={Sidebar} hideDrawerButton drawerWidth={300} >
-                          <Scene key='home' component={requireAuth(Home)} title='home'hideNavBar />
-                          <Scene key='carts' component={requireAuth(Cart)} title='cart' hideNavBar />
-                      </Drawer>
-                      <Scene key='login' component={Login} title='Login' hideNavBar/>
-                      <Scene key='signup' component={Signup} title='Signup'  hideNavBar/>
-                      <Scene key={'product'} path={"/product/:id/"} component={requireAuth(ProductDetails)} navBar={BackHeader} />
-                      <Scene key='checkout' component={Checkout} navBar={BackHeader} />
-                      <Scene key='mysterybox' component={MysteryBox} title='mysterybox' navBar={BackHeader} />
-                      <Scene key='dealshome' component={DealsHome} title='dealshome' navBar={BackHeader} />
-                      <Scene key='notificationshome' component={NotificationsHome} title='notificationshome' navBar={BackHeader} />
-                      <Scene key='categorieshome' component={CategoriesHome} title='categorieshome' navBar={BackHeader} />
-                      <Scene key='tailorshome' component={TailorsHome} title='tailorshome' navBar={BackHeader} />
-                      <Scene key='transactionshome' component={TransactionsHome} title='transactionshome' navBar={BackHeader} />
-                  </Scene>
-              </Router>
+          <Router>
+              <Scene key='root' navBar={Header} >
+                  <Drawer key="drawer" contentComponent={Sidebar} hideDrawerButton drawerWidth={300} >
+                      <Scene key='home' component={Home} title='home' hideNavBar />
+                      <Scene key='carts' component={Cart} title='cart' hideNavBar />
+                  </Drawer>
+                  <Scene key='login' component={Login} title='Login' hideNavBar/>
+                  <Scene key='signup' component={Signup} title='Signup'  hideNavBar/>
+                  <Scene key={'product'} path={"/product/:id/"} component={ProductDetails} navBar={BackHeader} />
+                  <Scene key='checkout' component={Checkout} navBar={BackHeader} />
+                  <Scene key='mysterybox' component={MysteryBox} title='mysterybox' navBar={BackHeader} />
+                  <Scene key='dealshome' component={DealsHome} title='dealshome' navBar={BackHeader} />
+                  <Scene key='notificationshome' component={NotificationsHome} title='notificationshome' navBar={BackHeader} />
+                  <Scene key='categorieshome' component={CategoriesHome} title='categorieshome' navBar={BackHeader} />
+                  <Scene key='tailorshome' component={TailorsHome} title='tailorshome' navBar={BackHeader} />
+                  <Scene key='transactionshome' component={TransactionsHome} title='transactionshome' navBar={BackHeader} />
+              </Scene>
+          </Router>
     );
   }
 }

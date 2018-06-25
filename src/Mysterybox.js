@@ -9,12 +9,10 @@ import MysteryBoxForm from './MysteryBoxForm'
 class MysteryBox extends Component {
 
    state = {
-       interval: '',
+       gender: '',
        worth: '',
-       favourite_colours: '',
-       expectation: '',
+       style: '',
        contact_name: '',
-       age: '',
        contact_number: '',
        address: ''
    }
@@ -24,13 +22,11 @@ class MysteryBox extends Component {
      axios.defaults.headers.common['Devless-token'] = 'd463354149e3e51dd115ec140819e0a7';
      try{
          if (
-             this.state.interval == '' || 
+             this.state.gender == '' || 
              this.state.worth == '' || 
-             this.state.favourite_colours == '' || 
-             this.state.expectation == '' || 
-             this.state.contact_name == '' ||
-             this.state.age == '' ||
-             this.state.contact_number == '' ||
+             this.state.style == '' || 
+             this.state.contact_name == '' || 
+             this.state.contact_number == '' || 
              this.state.address == '' 
             ){
                 Alert.alert('One of your details is empty');
@@ -40,12 +36,10 @@ class MysteryBox extends Component {
                     "resource": [{
                         "name": "mystery_box",
                         "field": [{
-                            "interval": this.state.interval,
+                            "gender": this.state.gender,
                             "worth": this.state.worth,
-                            "favourite_colours": this.state.favourite_colours,
-                            "expectation": this.state.expectation,
+                            "style": this.state.style,
                             "contact_name": this.state.contact_name,
-                            "age": this.state.age,
                             "contact_number": this.state.contact_number,
                             "address": this.state.address
                         }]
@@ -53,12 +47,11 @@ class MysteryBox extends Component {
                 })
                 Alert.alert("Successfully subscribed. You can go back to view more fabrics.");
                 this.setState({
-                    interval: '',
+                    gender: '',
                     worth: '',
-                    favourite_colours: '',
+                    style: '',
                     expectation: '',
                     contact_name: '',
-                    age: '',
                     contact_number: '',
                     address: ''
                 })

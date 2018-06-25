@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TextInput, Picker, TouchableOpacity, KeyboardAv
 
 const CheckoutForm = ({network, type, fields, onChange, onCheckout}) => (
        <KeyboardAvoidingView
-            behavior="position"
+            behavior="padding"
             style={styles.container}
          >
         <Text style={{fontSize: 20, color: 'red', alignSelf: 'center'}}>Make payment</Text>
@@ -24,6 +24,7 @@ const CheckoutForm = ({network, type, fields, onChange, onCheckout}) => (
             <Picker.Item label="Airtel Money" value="AIR" />
             <Picker.Item label="Vodafone Cash" value="VOD" />
             <Picker.Item label="Tigo Cash" value="TIG" />
+            <Picker.Item label="Cash on delivery" value="COD" />
         </Picker>
         <Text style={{paddingTop: 10, paddingLeft: 10, paddingRight: 10, alignSelf: 'center'}}>Enter vodafone voucher code (For vodafone cash users only)</Text>
         <TextInput 
