@@ -14,8 +14,7 @@ class Carts extends PureComponent {
         totalPricing: 0,
         productIdtb: [],
         productQtb: [],
-        address: '',
-        deliveryDate: ''
+        address: ''
     }
 
     async componentDidMount () {
@@ -103,7 +102,6 @@ class Carts extends PureComponent {
             await AsyncStorage.setItem('quantities', JSON.stringify(stringQuantities))
             await AsyncStorage.setItem('pricing', JSON.stringify(totalPricing))
             await AsyncStorage.setItem('address', JSON.stringify(this.state.address))
-            await AsyncStorage.setItem('deliveryDate', JSON.stringify(this.state.deliveryDate))
 
             Alert.alert('Proceeding to checkout.')
             Actions.checkout();
@@ -129,7 +127,7 @@ class Carts extends PureComponent {
                     {this.renderCarts()}
                     <Text style={{paddingTop: 10,paddingBottom:10,fontSize:16, alignSelf:'center'}}>Total Cost: {this.state.totalPricing} ghc</Text>
                     <Text style={{paddingTop: 20,paddingBottom:10,fontSize:20, alignSelf:'center'}}>Delivery Address</Text>
-                    <CartForm fields={this.state} onChange={this.onChange} />
+                    <CartForm fields={this.state.address} onChange={this.onChange} />
                     <View behavior="height" style={{flexDirection:'row', justifyContent:'center'}}>
                         {carts && carts.length > 0 &&  
                         <Button onPress={this.makeOrder} backgroundColor='red'>

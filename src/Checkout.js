@@ -57,84 +57,41 @@ class Checkout extends PureComponent {
             let parsedAddress = JSON.parse(addressPerson)
             let stringAddress = parsedAddress.toString()
 
-            let deliveryDatePerson = await AsyncStorage.getItem('deliveryDate')
-            let parsedDeliveryDate = JSON.parse(deliveryDatePerson)
-            let stringDeliveryDate = parsedDeliveryDate.toString()
-
             if (this.state.mobileMoneyNo == '' || this.state.networkCode == ''){
                 Alert.alert('One of your fields is empty')
             }
             else {
-
-                if (this.state.networkCode == 'COD') {
-                    const res = await axios.post(url, {
-                        "resource": [{
-                            "name": "transaction-cod",
-                            "field": [{
-                                "customer_number": this.state.mobileMoneyNo,
-                                "fullname": stringFullname,
-                                "email_address": stringEmail,
-                                "amount": totalPricing,
-                                "product_id": stringIds,
-                                "quantity": stringQuantities,
-                                "user_id": userId,
-                                "address": stringAddress,
-                                "network_code": this.state.networkCode,
-                                "status": "pending",
-                                "existing_phonenumber": userPhonenumber,
-                                "delivery_date": stringDeliveryDate
-     
-                            }]
+                const res = await axios.post(url, {
+                    "resource": [{
+                        "name": "transaction",
+                        "field": [{
+                            "customer_number": this.state.mobileMoneyNo,
+                            "fullname": stringFullname,
+                            "email_address": stringEmail,
+                            "amount": totalPricing,
+                            "product_id": stringIds,
+                            "quantity": stringQuantities,
+                            "user_id": userId,
+                            "address": stringAddress,
+                            "transaction_id": "",
+                            "network_code": this.state.networkCode,
+                            "status": "pending",
+                            "existing_phonenumber": userPhonenumber,
+                            "vodafone_code": this.state.vodafoneCode
+ 
                         }]
-                    })
-                    // console.log(res.data);
-                    if(res.data.status_code == 609) {
-                        Alert.alert('Order has been placed. Check your phone for prompt.')
-                        await AsyncStorage.removeItem('carts')
-                        Actions.home();
-                    }
-                    else {
-                        Alert.alert('Cannot make order at this time. Please try again later.')
-                        Actions.home()
-                    }
-
+                    }]
+                })
+                // console.log(res.data);
+                if(res.data.status_code == 609) {
+                    Alert.alert('Order has been placed. Check your phone for prompt.')
+                    await AsyncStorage.removeItem('carts')
+                    Actions.home();
                 }
-
                 else {
-                    const res = await axios.post(url, {
-                        "resource": [{
-                            "name": "transaction",
-                            "field": [{
-                                "customer_number": this.state.mobileMoneyNo,
-                                "fullname": stringFullname,
-                                "email_address": stringEmail,
-                                "amount": totalPricing,
-                                "product_id": stringIds,
-                                "quantity": stringQuantities,
-                                "user_id": userId,
-                                "address": stringAddress,
-                                "transaction_id": "",
-                                "network_code": this.state.networkCode,
-                                "status": "pending",
-                                "existing_phonenumber": userPhonenumber,
-                                "vodafone_code": this.state.vodafoneCode,
-                                "delivery_date": stringDeliveryDate
-     
-                            }]
-                        }]
-                    })
-                    // console.log(res.data);
-                    if(res.data.status_code == 609) {
-                        Alert.alert('Order has been placed. Check your phone for prompt.')
-                        await AsyncStorage.removeItem('carts')
-                        Actions.home();
-                    }
-                    else {
-                        Alert.alert('Cannot make order at this time. Please try again later.')
-                        Actions.home()
-                    }
+                    Alert.alert('Cannot make order at this time. Please try again later.')
+                    Actions.home()
                 }
-                
              
             }
 

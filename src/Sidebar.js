@@ -1,18 +1,16 @@
 import React, { PureComponent } from 'react'
 import { View, ScrollView, Text, Image, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Icon } from 'native-base'
-import { Actions } from 'react-native-router-flux';
 import axios from 'axios'
+import { Actions } from 'react-native-router-flux'
 import SidebarCats from './SidebarCats'
-import { KeyboardAwareListView } from 'react-native-keyboard-aware-scroll-view';
 
 class Sidebar extends PureComponent {
 
     state = {
         data: [],
         firstName: '',
-        status: false,
-        madeOfRStatus : false
+        status: false
       }
 
     async componentWillMount(){
@@ -21,7 +19,6 @@ class Sidebar extends PureComponent {
         const resReversed = res.data.payload.results.reverse();
         const resSliced = resReversed.slice(0, 5)
         this.setState({ data:resSliced })
-        console.log(resSliced)
 
         let userFirstname = await AsyncStorage.getItem('first_name')
         let parsedFirstname = JSON.parse(userFirstname)
@@ -40,12 +37,6 @@ class Sidebar extends PureComponent {
             status: !this.state.status
           })
       }
-
-      toggleMORStatus = () => {
-        this.setState({
-            madeOfRStatus: !this.state.madeOfRStatus
-        })
-    }
 
       renderCats = () => {
         return this.state.data.map((data, i) => {
@@ -95,46 +86,6 @@ class Sidebar extends PureComponent {
                 {
                     this.state.status ? (
                         this.renderCats()
-                    ) : (
-                        null
-                    )
-                }
-                <TouchableOpacity onPress={this.toggleMORStatus} style={{flexDirection:'row', alignItems:'center', paddingTop:20, paddingLeft:20}}>
-                    <Image source={require('../category.png')} />
-                    <Text style={{paddingLeft:40}}>Made of Rose</Text>
-                    <Icon name='ios-arrow-down' style={{fontSize: 15, color: 'brown', paddingLeft: 60}} />
-                </TouchableOpacity>
-                {
-                    this.state.madeOfRStatus ? (
-                        <View>
-                            <TouchableOpacity onPress={
-                                async() => {
-                                        await AsyncStorage.setItem('cat', JSON.stringify('Men'))
-                                        Actions.categorieshome()
-                                    }
-                                } style={{flexDirection:'row', alignItems:'center', paddingTop:20, paddingLeft:40}}>
-                                <Image source={require('../category.png')} />
-                                <Text style={{paddingLeft:40}}>Men</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={
-                                async() => {
-                                        await AsyncStorage.setItem('cat', JSON.stringify('Women'))
-                                        Actions.categorieshome()
-                                    }
-                                } style={{flexDirection:'row', alignItems:'center', paddingTop:20, paddingLeft:40}}>
-                                <Image source={require('../category.png')} />
-                                <Text style={{paddingLeft:40}}>Women</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={
-                                async() => {
-                                        await AsyncStorage.setItem('cat', JSON.stringify('Kids'))
-                                        Actions.categorieshome()
-                                    }
-                                } style={{flexDirection:'row', alignItems:'center', paddingTop:20, paddingLeft:40}}>
-                                <Image source={require('../category.png')} />
-                                <Text style={{paddingLeft:40}}>Kids</Text>
-                            </TouchableOpacity>
-                        </View>
                     ) : (
                         null
                     )

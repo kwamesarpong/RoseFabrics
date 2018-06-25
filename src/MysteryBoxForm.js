@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Picker } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 
 const MysteryBoxForm = ({type, fields, onChange, onSubmit}) => (
        <View
@@ -7,42 +7,54 @@ const MysteryBoxForm = ({type, fields, onChange, onSubmit}) => (
             style={styles.container}
          >
         <Text style={{fontSize: 20, color: 'brown'}}>Mystery Box</Text>
-        <Text style={{paddingTop: 10}}>Full Name</Text>
+        <Text style={{paddingTop: 10}}>How often should we surprise you?</Text>
         <TextInput 
-            placeholder='Full name'
+            placeholder='Weekly, Twice a month, Monthly'
+            placeholderTextColor='#fff'
+            style={styles.textInput}
+            value={fields.interval}
+            onChangeText={(val) => onChange('interval', val)}
+            underlineColorAndroid='transparent' />
+        <Text style={{paddingTop: 10}}>Package worth</Text>
+        <TextInput 
+            placeholder='Ghc 48, Ghc 70, Ghc 140'
+            placeholderTextColor='#fff'
+            style={styles.textInput}
+            value={fields.worth}
+            onChangeText={(val) => onChange('worth', val)}
+            underlineColorAndroid='transparent' />
+        <Text style={{paddingTop: 10}}>List your favourite colors</Text>
+        <TextInput 
+            placeholder='Your answer'
+            placeholderTextColor='#fff'
+            style={styles.textInput}
+            value={fields.favourite_colours}
+            onChangeText={(val) => onChange('favourite_colours', val)}
+            underlineColorAndroid='transparent' />
+        <Text style={{paddingTop: 10}}>What do you expect to see in the box?</Text>
+        <TextInput 
+            placeholder='Your answer'
+            placeholderTextColor='#fff'
+            style={styles.textInput}
+            value={fields.expectation}
+            onChangeText={(val) => onChange('expectation', val)}
+            underlineColorAndroid='transparent' />
+        <Text style={{paddingTop: 10}}>Contact name</Text>
+        <TextInput 
+            placeholder='Your name'
             placeholderTextColor='#fff'
             style={styles.textInput}
             value={fields.contact_name}
             onChangeText={(val) => onChange('contact_name', val)}
             underlineColorAndroid='transparent' />
-        <Text style={{paddingTop: 10}}>Gender</Text>
-        <Picker
-            selectedValue={fields.gender}
-            style={{width: 300}}
-            onValueChange={(val) => onChange('gender', val)}>
-            <Picker.Item label="Select one" value='' />
-            <Picker.Item label="Male" value="Male" />
-            <Picker.Item label="Female" value="Female" />
-        </Picker>
-        <Text style={{paddingTop: 10}}>Package worth</Text>
-        <Picker
-            selectedValue={fields.worth}
-            style={{width: 300}}
-            onValueChange={(val) => onChange('worth', val)}>
-            <Picker.Item label="Select one" value='' />
-            <Picker.Item label="GHc 70 (6 yards)" value="6 yards" />
-            <Picker.Item label="GHc 140 (12 yards)" value="12 yards" />
-        </Picker>
-        <Text style={{paddingTop: 10}}>What's your style?</Text>
-        <Picker
-            selectedValue={fields.style}
-            style={{width: 300}}
-            onValueChange={(val) => onChange('style', val)}>
-            <Picker.Item label="Select one" value='' />
-            <Picker.Item label="Bright Colors" value="Bright Colors" />
-            <Picker.Item label="Midtone Colors" value="Midtone Colors" />
-            <Picker.Item label="A bit of Both" value="A bit of Both" />
-        </Picker>
+        <Text style={{paddingTop: 10}}>Age</Text>
+        <TextInput 
+            placeholder='Your age'
+            placeholderTextColor='#fff'
+            style={styles.textInput}
+            value={fields.age}
+            onChangeText={(val) => onChange('age', val)}
+            underlineColorAndroid='transparent' />
         <Text style={{paddingTop: 10}}>Contact number</Text>
         <TextInput 
             placeholder='Phone number'
