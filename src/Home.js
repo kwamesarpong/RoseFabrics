@@ -8,7 +8,7 @@ import Header from './Header'
 import SearchBar from './Search'
 import Products from './Products'
 import Selection from './Selection'
-import OneSignal from 'react-native-onesignal';
+import OneSignal from 'react-native-onesignal'
 
 class Home extends PureComponent {
 
@@ -45,11 +45,10 @@ class Home extends PureComponent {
         loading: false
       })
 
-      // OneSignal.init("fd5bfbad-8190-4ae9-9f46-7c6f1bec6057");
-
       OneSignal.addEventListener('received', this.onReceived);
       OneSignal.addEventListener('opened', this.onOpened);
       OneSignal.addEventListener('ids', this.onIds);
+
   }
 
   componentWillUnmount() {

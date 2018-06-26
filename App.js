@@ -23,21 +23,22 @@ import NotificationsHome from './src/NotificationsHome'
 import CategoriesHome from './src/CategoriesHome'
 import TailorsHome from './src/TailorsHome'
 import TransactionsHome from './src/TransactionsHome'
-import SplashScreen from 'react-native-splash-screen';
+import SplashScreen from 'react-native-splash-screen'
+
 
 
 export default class App extends Component<Props> {
   
-  async componentDidMount() {
-    if(await AsyncStorage.getItem('token')){
-        this.setState({ loading: false })
+    async componentDidMount() {
+        if(await AsyncStorage.getItem('token')){
+            this.setState({ loading: false })
+        }
+        else {
+            this.setState({ loading: false })
+            Actions.login()
+        }
+        SplashScreen.hide();
     }
-    else {
-        this.setState({ loading: false })
-        Actions.login()
-    }
-      SplashScreen.hide();
-  }
 
   render() {
     return (
