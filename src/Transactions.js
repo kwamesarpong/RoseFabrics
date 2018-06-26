@@ -12,7 +12,7 @@ class Transactions extends Component {
   
   async componentWillMount(){
     let userId = await AsyncStorage.getItem('user_id')
-    const url = 'http://50.116.8.175/api/v1/service/rosefabrics/db?table=transaction&where=user_id,' + /* userId */ '5'
+    const url = 'http://50.116.8.175/api/v1/service/rosefabrics/db?table=transaction&where=user_id,' + userId
     const res = await axios.get(url, {headers: {'Devless-token': 'd463354149e3e51dd115ec140819e0a7'}})
     const resReversed = res.data.payload.results.reverse();
     this.setState({

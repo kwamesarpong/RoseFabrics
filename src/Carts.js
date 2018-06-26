@@ -14,6 +14,7 @@ class Carts extends PureComponent {
         totalPricing: 0,
         productIdtb: [],
         productQtb: [],
+        productNames: [],
         address: '',
         deliveryDate: ''
     }
@@ -26,11 +27,13 @@ class Carts extends PureComponent {
 
             let product_ids = [];
             let product_quantity = [];
+            let product_names = [];
             let totalCost = 0;
 
             cartsParsed.forEach(async(data) => {
                 product_ids.push(data.id);
                 product_quantity.push(data.quantity);
+                product_names.push(data.name)
 
                 totalCost += (data.price * data.quantity)
             })
@@ -55,6 +58,7 @@ class Carts extends PureComponent {
                 carts: newList,
                 productQtb: this.state.productQtb.filter(item =>  item !== id),
                 productIdtb: this.state.productIdtb.filter(item =>  item !== id),
+                productNames: this.state.productNames.filter(item =>  item !== id),
                 totalPricing: totalCost
             });
             let totalCost = 0
@@ -67,7 +71,7 @@ class Carts extends PureComponent {
                 await AsyncStorage.removeItem('carts')
                 return Actions.home()
             }
-            Alert.alert('Product removed from carts')
+            Alert.alert('Product removed from cart')
             return await AsyncStorage.setItem('carts', JSON.stringify(this.state.carts))
         } catch (e) {
             console.log(e)
@@ -98,9 +102,11 @@ class Carts extends PureComponent {
             let stringIds = this.state.productIdtb;
             let stringQuantities = this.state.productQtb;
             let totalPricing = this.state.totalPricing;
+            let stringProductNames = this.state.productNames;
 
             await AsyncStorage.setItem('ids', JSON.stringify(stringIds))
             await AsyncStorage.setItem('quantities', JSON.stringify(stringQuantities))
+            await AsyncStorage.setItem('pnames', JSON.stringify(stringProductNames))
             await AsyncStorage.setItem('pricing', JSON.stringify(totalPricing))
             await AsyncStorage.setItem('address', JSON.stringify(this.state.address))
             await AsyncStorage.setItem('deliveryDate', JSON.stringify(this.state.deliveryDate))

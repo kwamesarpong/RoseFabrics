@@ -51,6 +51,10 @@ class Checkout extends PureComponent {
             let parsedQuantities = JSON.parse(productQuantities)
             let stringQuantities = parsedQuantities.toString();
 
+            let productNames = await AsyncStorage.getItem('pnames')
+            let parsedProductNames = JSON.parse(productNames)
+            let stringProductNames = parsedProductNames.toString();
+
             let totalPricing = await AsyncStorage.getItem('pricing')
 
             let addressPerson = await AsyncStorage.getItem('address')
@@ -82,7 +86,8 @@ class Checkout extends PureComponent {
                                 "network_code": this.state.networkCode,
                                 "status": "pending",
                                 "existing_phonenumber": userPhonenumber,
-                                "delivery_date": stringDeliveryDate
+                                "delivery_date": stringDeliveryDate,
+                                "product_names": stringProductNames
      
                             }]
                         }]
@@ -118,7 +123,8 @@ class Checkout extends PureComponent {
                                 "status": "pending",
                                 "existing_phonenumber": userPhonenumber,
                                 "vodafone_code": this.state.vodafoneCode,
-                                "delivery_date": stringDeliveryDate
+                                "delivery_date": stringDeliveryDate,
+                                "product_names": stringProductNames
      
                             }]
                         }]
