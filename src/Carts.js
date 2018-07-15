@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux'
 import axios from 'axios'
 import Header from './Header'
 import CartList from './CartList'
-import CartForm from './CartForm'
 
 class Carts extends PureComponent {
 
@@ -108,11 +107,11 @@ class Carts extends PureComponent {
             await AsyncStorage.setItem('quantities', JSON.stringify(stringQuantities))
             await AsyncStorage.setItem('pnames', JSON.stringify(stringProductNames))
             await AsyncStorage.setItem('pricing', JSON.stringify(totalPricing))
-            await AsyncStorage.setItem('address', JSON.stringify(this.state.address))
-            await AsyncStorage.setItem('deliveryDate', JSON.stringify(this.state.deliveryDate))
+            // await AsyncStorage.setItem('address', JSON.stringify(this.state.address))
+            // await AsyncStorage.setItem('deliveryDate', JSON.stringify(this.state.deliveryDate))
 
-            Alert.alert('Proceeding to checkout.')
-            Actions.checkout();
+            Alert.alert('Proceeding to delivery address.')
+            Actions.deliveryaddress();
 
         }catch(e){
             Alert.alert('Sorry an error occurred')
@@ -134,11 +133,9 @@ class Carts extends PureComponent {
                     </Text>
                     {this.renderCarts()}
                     <Text style={{paddingTop: 10,paddingBottom:10,fontSize:16, alignSelf:'center'}}>Total Cost: {this.state.totalPricing} ghc</Text>
-                    <Text style={{paddingTop: 20,paddingBottom:10,fontSize:20, alignSelf:'center'}}>Delivery Address</Text>
-                    <CartForm fields={this.state} onChange={this.onChange} />
                     <View behavior="height" style={{flexDirection:'row', justifyContent:'center'}}>
                         {carts && carts.length > 0 &&  
-                        <Button onPress={this.makeOrder} backgroundColor='red'>
+                        <Button onPress={this.makeOrder} backgroundColor='brown'>
                             <Text style={{color:'white', paddingLeft: 20, paddingRight:20}}>Proceed to checkout</Text>
                         </Button>}
                     </View>

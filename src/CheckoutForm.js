@@ -6,7 +6,7 @@ const CheckoutForm = ({network, type, fields, onChange, onCheckout}) => (
             behavior="padding"
             style={styles.container}
          >
-        <Text style={{fontSize: 20, color: 'red', alignSelf: 'center'}}>Make payment</Text>
+        <Text style={{fontSize: 20, color: 'brown', alignSelf: 'center'}}>Make payment</Text>
         <Text style={{paddingTop: 10, alignSelf: 'center'}}>Choose your network</Text>
         {/* <TextInput 
             placeholder='Network'
@@ -17,7 +17,7 @@ const CheckoutForm = ({network, type, fields, onChange, onCheckout}) => (
             underlineColorAndroid='transparent' /> */}
         <Picker
             selectedValue={network}
-            //onValueChange={(itemValue, itemIndex) => this.setState({network: itemValue})}>
+            style={styles.pickerStyle}
             onValueChange={(item) => onChange('networkCode', item)}>
             <Picker.Item label="Payment method" value='' />
             <Picker.Item label="MTN Mobile Money" value="MTN" />
@@ -81,6 +81,12 @@ const styles = StyleSheet.create({
         fontWeight:'500',
         color:'#ffffff',
         textAlign:'center'
+    },
+    pickerStyle: {
+        width: 300,
+        backgroundColor: 'brown',
+        borderRadius: 5,
+        color: '#ffffff'
     }
 })
 export default CheckoutForm

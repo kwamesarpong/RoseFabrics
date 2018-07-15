@@ -16,6 +16,8 @@ import Home from './src/Home'
 import Cart from './src/Carts'
 import ProductDetails from './src/ProductDetails'
 import Checkout from './src/Checkout'
+import DeliveryAddress from './src/DeliveryAddress'
+import Invoice from './src/Invoice'
 import requireAuth from './src/HOC'
 import MysteryBox from './src/Mysterybox'
 import DealsHome from './src/DealsHome'
@@ -52,6 +54,8 @@ export default class App extends Component<Props> {
                   <Scene key='signup' component={Signup} title='Signup'  hideNavBar/>
                   <Scene key={'product'} path={"/product/:id/"} component={ProductDetails} navBar={BackHeader} />
                   <Scene key='checkout' component={Checkout} navBar={BackHeader} />
+                  <Scene key='deliveryaddress' component={DeliveryAddress} navBar={BackHeader} />
+                  <Scene key='invoice' component={Invoice} navBar={BackHeader} />
                   <Scene key='mysterybox' component={MysteryBox} title='mysterybox' navBar={BackHeader} />
                   <Scene key='dealshome' component={DealsHome} title='dealshome' navBar={BackHeader} />
                   <Scene key='notificationshome' component={NotificationsHome} title='notificationshome' navBar={BackHeader} />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Text, TextInput, Picker, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 const CartForm = ({fields, onChange}) => (
         <KeyboardAvoidingView
@@ -7,18 +7,27 @@ const CartForm = ({fields, onChange}) => (
             style={styles.container}>
             <TextInput 
                 placeholder='Your Address'
-                placeholderTextColor='gray'
+                placeholderTextColor='#fff'
                 multiline
                 style={styles.textInput}
                 value={fields.address}
                 onChangeText={(val) => onChange('address', val)}
                 underlineColorAndroid='transparent' />
 
-            <Text style={{paddingTop: 20,paddingBottom:10,fontSize:20, alignSelf:'center'}}>Delivery Date</Text>
+            <Picker
+                selectedValue={fields.deliveryCity}
+                style={styles.pickerStyle}
+                onValueChange={(val) => onChange('deliveryCity', val)}>
+                <Picker.Item label="City of Residence" value='' />
+                <Picker.Item label="Accra or Tema" value="AccraOrTema" />
+                <Picker.Item label="Outside Accra" value="OutsideAccra" />
+            </Picker>
+
+            <Text style={{paddingTop: 20,paddingBottom:10,fontSize:16, alignSelf:'center',color: 'brown'}}>Delivery Date</Text>
 
             <TextInput 
                 placeholder='DD-MM-YYYY'
-                placeholderTextColor='gray'
+                placeholderTextColor='#fff'
                 multiline
                 style={styles.deliveryDate}
                 value={fields.deliveryDate}
@@ -37,7 +46,7 @@ const styles = StyleSheet.create({
     },
     textInput: {
         width: 300,
-        backgroundColor: '#fff',
+        backgroundColor: 'brown',
         borderColor: 'brown',
         borderStyle: 'solid',
         borderWidth: 1,
@@ -46,12 +55,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         paddingHorizontal:16, 
         fontSize: 16,
-        color: '#000000',
+        color: '#fff',
         marginVertical: 10
     },
     deliveryDate: {
         width: 300,
-        backgroundColor: '#fff',
+        backgroundColor: 'brown',
         borderColor: 'brown',
         borderStyle: 'solid',
         borderWidth: 1,
@@ -60,8 +69,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         paddingHorizontal:16, 
         fontSize: 16,
-        color: '#000000',
+        color: '#fff',
         marginVertical: 10
+    },
+    pickerStyle: {
+        width: 300,
+        backgroundColor: 'brown',
+        borderRadius: 5,
+        color: '#ffffff'
     }
 })
 export default CartForm
