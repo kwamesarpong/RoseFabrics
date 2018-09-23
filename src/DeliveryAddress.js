@@ -41,7 +41,6 @@ class DeliveryAddress extends PureComponent {
             await AsyncStorage.setItem('deliveryDate', JSON.stringify(this.state.deliveryDate));
             await AsyncStorage.setItem('deliveryCity', JSON.stringify(this.state.deliveryCity));
 
-            Alert.alert('Proceeding to checkout.')
             Actions.invoice();
 
         }catch(e){
@@ -60,7 +59,7 @@ class DeliveryAddress extends PureComponent {
                     <View behavior="height" style={{flexDirection:'row', justifyContent:'center'}}>
                         
                       <Button onPress={this.makeOrder} backgroundColor='brown'>
-                          <Text style={{color:'white', paddingLeft: 20, paddingRight:20}}>Proceed to checkout</Text>
+                          <Text style={{color:'white', paddingLeft: 20, paddingRight:20}}>Proceed to Invoice</Text>
                       </Button>
                     </View>
                 </View>

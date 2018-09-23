@@ -35,10 +35,20 @@ class Invoice extends PureComponent {
               });
             }
             else {
-              this.setState({
-                deliveryCityCost: 0,
-                totalCost: parsedPricing
-              });
+
+                if(parsedPricing < 60) {
+                    parsedPricing = parsedPricing + 20;
+                    this.setState({
+                        totalCost: parsedPricing,
+                        deliveryCityCost: 20
+                    });
+                }
+                else {
+                    this.setState({
+                        deliveryCityCost: 0,
+                        totalCost: parsedPricing
+                    });
+                }
             }
 
           } catch (e) {
@@ -77,7 +87,7 @@ class Invoice extends PureComponent {
 
                       <Text style={{color: 'brown',paddingBottom:10}}>Cost of Items ................ GHc {this.state.totalPricing}</Text>
 
-                      <Text style={{color: 'brown',paddingBottom:10}}>Cost Delivery ................ GHc {this.state.deliveryCityCost}</Text>
+                      <Text style={{color: 'brown',paddingBottom:10}}>Cost of Delivery ................ GHc {this.state.deliveryCityCost}</Text>
                     </View>
 
                     <View style={{alignItems:'center', paddingTop: 10, paddingBottom: 10}}>

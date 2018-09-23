@@ -100,6 +100,7 @@ class ProductDetails extends PureComponent {
                                     onChangeText={(quantity) => this.setState({ quantity })}
                                     underlineColorAndroid='transparent' />
                             </KeyboardAvoidingView>
+                            <Text style={{alignSelf: 'center'}}>Pieces</Text>
                         </View>
                         <Button
                             backgroundColor='red'

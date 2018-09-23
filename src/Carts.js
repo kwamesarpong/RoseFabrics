@@ -110,7 +110,6 @@ class Carts extends PureComponent {
             // await AsyncStorage.setItem('address', JSON.stringify(this.state.address))
             // await AsyncStorage.setItem('deliveryDate', JSON.stringify(this.state.deliveryDate))
 
-            Alert.alert('Proceeding to delivery address.')
             Actions.deliveryaddress();
 
         }catch(e){
@@ -136,7 +135,7 @@ class Carts extends PureComponent {
                     <View behavior="height" style={{flexDirection:'row', justifyContent:'center'}}>
                         {carts && carts.length > 0 &&  
                         <Button onPress={this.makeOrder} backgroundColor='brown'>
-                            <Text style={{color:'white', paddingLeft: 20, paddingRight:20}}>Proceed to checkout</Text>
+                            <Text style={{color:'white', paddingLeft: 20, paddingRight:20}}>Proceed to Delivery Address</Text>
                         </Button>}
                     </View>
                 </View>

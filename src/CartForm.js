@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput, Picker, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import DatePicker from 'react-native-datepicker'
 
 const CartForm = ({fields, onChange}) => (
         <KeyboardAvoidingView
@@ -25,14 +26,28 @@ const CartForm = ({fields, onChange}) => (
 
             <Text style={{paddingTop: 20,paddingBottom:10,fontSize:16, alignSelf:'center',color: 'brown'}}>Delivery Date</Text>
 
-            <TextInput 
-                placeholder='DD-MM-YYYY'
-                placeholderTextColor='#fff'
-                multiline
+            <DatePicker
                 style={styles.deliveryDate}
-                value={fields.deliveryDate}
-                onChangeText={(val) => onChange('deliveryDate', val)}
-                underlineColorAndroid='transparent' />
+                date={fields.deliveryDate}
+                mode="date"
+                placeholder="Select Date"
+                format="DD-MM-YYYY"
+                minDate="01-01-2018"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                dateIcon: {
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0
+                },
+                dateInput: {
+                    marginLeft: 36
+                }
+                }}
+                onDateChange={(val) => onChange('deliveryDate', val)}
+            />
 
         </KeyboardAvoidingView>
 )
@@ -60,16 +75,8 @@ const styles = StyleSheet.create({
     },
     deliveryDate: {
         width: 300,
-        backgroundColor: 'brown',
-        borderColor: 'brown',
-        borderStyle: 'solid',
-        borderWidth: 1,
         borderRadius: 5,
-        height: 50,
         alignSelf: 'center',
-        paddingHorizontal:16, 
-        fontSize: 16,
-        color: '#fff',
         marginVertical: 10
     },
     pickerStyle: {
