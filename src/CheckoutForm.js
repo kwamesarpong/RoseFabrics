@@ -7,7 +7,7 @@ const CheckoutForm = ({network, type, fields, onChange, onCheckout}) => (
             style={styles.container}
          >
         <Text style={{fontSize: 20, color: 'brown', alignSelf: 'center'}}>Make payment</Text>
-        <Text style={{paddingTop: 10, alignSelf: 'center'}}>Choose your network</Text>
+        <Text style={{paddingTop: 10, alignSelf: 'center', marginBottom: 20}}>Choose your network</Text>
         {/* <TextInput 
             placeholder='Network'
             placeholderTextColor='#fff'
@@ -26,7 +26,7 @@ const CheckoutForm = ({network, type, fields, onChange, onCheckout}) => (
             <Picker.Item label="Tigo Cash" value="TIG" />
             <Picker.Item label="Cash on delivery" value="COD" />
         </Picker>
-        <Text style={{paddingTop: 10, paddingLeft: 10, paddingRight: 10, alignSelf: 'center'}}>Enter vodafone voucher code (For vodafone cash users only)</Text>
+        <Text style={{paddingTop: 20, paddingLeft: 30, paddingRight: 30, alignSelf: 'center'}}>Enter vodafone voucher code (For vodafone cash users only)</Text>
         <TextInput 
             placeholder='Voucher code'
             placeholderTextColor='#fff'
@@ -35,7 +35,7 @@ const CheckoutForm = ({network, type, fields, onChange, onCheckout}) => (
             value={fields.vodafoneCode}
             onChangeText={(item) => onChange('vodafoneCode', item)}
             underlineColorAndroid='transparent' />
-        <Text style={{paddingTop: 10, paddingLeft: 10, paddingRight: 10, alignSelf: 'center'}}>Type the phone number you want to use for the payment</Text>
+        <Text style={{paddingTop: 20, paddingLeft: 30, paddingRight: 30, alignSelf: 'center'}}>Type the phone number you want to use for the payment</Text>
         <TextInput 
             placeholder='0240123456'
             placeholderTextColor='#fff'

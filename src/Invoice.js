@@ -67,7 +67,6 @@ class Invoice extends PureComponent {
           await AsyncStorage.setItem('deliveryCity', JSON.stringify(this.state.deliveryCity));
           await AsyncStorage.setItem('pricing', JSON.stringify(this.state.totalCost));
 
-          Alert.alert('Proceeding to checkout.')
           Actions.checkout();
 
       }catch(e){
@@ -90,7 +89,7 @@ class Invoice extends PureComponent {
                       <Text style={{color: 'brown',paddingBottom:10}}>Cost of Delivery ................ GHc {this.state.deliveryCityCost}</Text>
                     </View>
 
-                    <View style={{alignItems:'center', paddingTop: 10, paddingBottom: 10}}>
+                    <View style={{alignItems:'center', paddingTop: 10, paddingBottom: 10, marginBottom: 10}}>
                       <Text style={{color: 'brown'}}>Total: GHc {this.state.totalCost}</Text>
                     </View>
 

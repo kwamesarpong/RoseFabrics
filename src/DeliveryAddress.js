@@ -56,7 +56,7 @@ class DeliveryAddress extends PureComponent {
                 <View style={{backgroundColor: 'white', paddingBottom: 300}}>
                     <Text style={{paddingTop: 20,paddingBottom:10,fontSize:16, alignSelf:'center',color: 'brown'}}>Enter Delivery Address</Text>
                     <CartForm fields={this.state} onChange={this.onChange} />
-                    <View behavior="height" style={{flexDirection:'row', justifyContent:'center'}}>
+                    <View behavior="height" style={{flexDirection:'row', justifyContent:'center',marginTop: 20}}>
                         
                       <Button onPress={this.makeOrder} backgroundColor='brown'>
                           <Text style={{color:'white', paddingLeft: 20, paddingRight:20}}>Proceed to Invoice</Text>

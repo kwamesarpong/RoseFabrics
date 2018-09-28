@@ -131,7 +131,7 @@ class Carts extends PureComponent {
                         {carts && carts.length > 0 ? 'Your Cart' : 'Nothing in Cart'}
                     </Text>
                     {this.renderCarts()}
-                    <Text style={{paddingTop: 10,paddingBottom:10,fontSize:16, alignSelf:'center'}}>Total Cost: {this.state.totalPricing} ghc</Text>
+                    <Text style={{paddingTop: 10,paddingBottom:10,fontSize:16, alignSelf:'center', marginBottom: 20}}>Total Cost: {this.state.totalPricing} ghc</Text>
                     <View behavior="height" style={{flexDirection:'row', justifyContent:'center'}}>
                         {carts && carts.length > 0 &&  
                         <Button onPress={this.makeOrder} backgroundColor='brown'>
